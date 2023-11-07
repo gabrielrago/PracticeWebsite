@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <title>My Sample Website</title>
+    
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Sample Website</h1>
+    </header>
+    <div class="container">
+        <section>
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <p>Nullam nec congue tortor, eget volutpat urna...</p>
+        </section>
+        <section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to ask our chatbot below or use the contact form.</p>
+        </section>
+    </div>
+    <div class="container">
+        <section>
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <p>Nullam nec congue tortor, eget volutpat urna...</p>
+        </section>
+        <section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to ask our chatbot below or use the contact form.</p>
+        </section>
+    </div>
+    <div class="container">
+        <section>
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <p>Nullam nec congue tortor, eget volutpat urna...</p>
+        </section>
+        <section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to ask our chatbot below or use the contact form.</p>
+        </section>
+    </div>
+    <div class="container">
+        <section>
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <p>Nullam nec congue tortor, eget volutpat urna...</p>
+        </section>
+        <section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to ask our chatbot below or use the contact form.</p>
+        </section>
+    </div>
+    <div class="container">
+        <section>
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            <p>Nullam nec congue tortor, eget volutpat urna...</p>
+        </section>
+        <section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, feel free to ask our chatbot below or use the contact form.</p>
+        </section>
+    </div>
+    <!-- Chatbot Button -->
+    <div class="chatbot-plugin" id="chatbot-plugin">
+        <span id="chatbot-icon">&#128172;</span>
+    </div>
+    <!-- Chatpane (Initially hidden) -->
+    <div class="chatpane" id="chatpane">
+        <div class="chatpane-header" id="chatpane-header">
+            Chatbot
+        </div>
+        <div class="chatpane-body" id="chatpane-body">
+            <div id="chat-messages"></div>
+            <input type="text" id="user-input" class="chat-input" placeholder="Type your message...">
+        </div>
+    </div>
+    <!-- JavaScript for Chatbot Interaction -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Add jQuery -->
+    <script>
+        const chatbotIcon = document.getElementById('chatbot-icon');
+        const chatpane = document.getElementById('chatpane');
+        const chatMessages = document.getElementById('chat-messages'); // Added chatMessages
+
+        // Function to toggle chatpane visibility
+        function toggleChatpane() {
+            if (chatpane.style.display === 'none' || chatpane.style.display === '') {
+                chatpane.style.display = 'block';
+            } else {
+                chatpane.style.display = 'none';
+            }
+        }
+
+        chatbotIcon.addEventListener('click', () => {
+            toggleChatpane();
+        });
+
+        const chatpaneHeader = document.getElementById('chatpane-header');
+        const userInput = document.getElementById('user-input');
+
+        chatpaneHeader.addEventListener('click', () => {
+            toggleChatpane();
+        });
+
+        // Function to display user messages in chatpane
+        function displayUserMessage(message) {
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.textContent = message;
+            chatMessages.appendChild(userMessage);
+
+            // Clear user input
+            userInput.value = '';
+        }
+
+        // Function to display bot messages in chatpane
+        function displayBotMessage(message) {
+            const botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            botMessage.textContent = message;
+            chatMessages.appendChild(botMessage);
+        }
+
+        userInput.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                const message = userInput.value.trim();
+                if (message !== '') {
+                    displayUserMessage(message); // Display user message
+                    // Send the user message to Flask via AJAX
+                    $.ajax({
+                        url: '/chat',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ 'message': message }),
+                        success: function(data) {
+                            displayBotMessage(data.response); // Display bot response
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            displayBotMessage("Kakapoy wa gihapon");
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

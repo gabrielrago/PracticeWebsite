@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* changed to black */
+    color: #f5f5f5; /* light gray for general text color */
+}
+header {
+    background-color: #000; /* changed to black */
+    color: #ffcc00; /* changed to yellow */
+    padding: 20px;
+    text-align: center;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #000; /* changed to black */
+}
+h1, h2 {
+    color: #ffcc00; /* changed to yellow */
+}
+.chatbot-plugin {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffcc00; /* changed to yellow */
+    color: #000; /* changed to black */
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#chatbot-icon {
+    font-size: 30px;
+    color: #fff;
+}
+
+.chatpane {
+    position: fixed;
+    bottom: 90px; /* Slightly above the chatbot icon */
+    right: 10px;
+    width: 300px;
+    background-color: #000; /* changed to black */
+    border-radius: 10px 10px 0 0;
+    border: 1px solid #ffcc00; /* changed to yellow */
+    box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.5); /* yellow shadow */
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+}
+.chatpane-header {
+    background-color: #ffcc00; /* changed to yellow */
+    color: #000; /* changed to black */
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.chatpane-body {
+    padding: 10px;
+}
+
+#chat-messages {
+    max-height: 400px; /* Adjust based on desired pane height */
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+
+.chat-input {
+    width: 100%;
+    border: 1px solid #ffcc00; /* changed to yellow */
+    border-radius: 5px;
+    background-color: #000; /* changed to black */
+    color: #f5f5f5; /* light gray for text color */
+}
+
+.user-message {
+    background-color: #ffcc00;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    align-self: flex-end;
+    color: black;
+}
